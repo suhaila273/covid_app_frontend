@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final plant = plantFromJson(jsonString);
+//     final patient = patientFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Plant> plantFromJson(String str) => List<Plant>.from(json.decode(str).map((x) => Plant.fromJson(x)));
+List<Patient> patientFromJson(String str) => List<Patient>.from(json.decode(str).map((x) => Patient.fromJson(x)));
 
-String plantToJson(List<Plant> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String patientToJson(List<Patient> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Plant {
+class Patient {
   String name;
   String phone;
   String address;
   String symptom;
   String status;
 
-  Plant({
+  Patient({
     required this.name,
     required this.phone,
     required this.address,
@@ -23,7 +23,7 @@ class Plant {
     required this.status,
   });
 
-  factory Plant.fromJson(Map<String, dynamic> json) => Plant(
+  factory Patient.fromJson(Map<String, dynamic> json) => Patient(
     name: json["name"],
     phone: json["phone"],
     address: json["address"],
