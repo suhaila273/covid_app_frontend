@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:covid_app/model/patient_model.dart';
 import 'package:http/http.dart' as http;
 
 class CovidApiService {
@@ -28,4 +29,21 @@ class CovidApiService {
       throw Exception("failed to add");
     }
   }
+
+  Future<List<Patient>> getData() async{
+    var client= http.Client();
+    var apiUrl=Uri.parse("http://localhost:3001/api/patient/view");
+
+    var response= await client.get(apiUrl);
+    if(response.statusCode==200)
+    {
+      return patientFromJson(response.body);
+    }
+    else
+    {
+      return [];
+    }
+
+  }
+
 }
