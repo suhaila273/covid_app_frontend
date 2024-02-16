@@ -4,6 +4,28 @@ import 'package:covid_app/model/patient_model.dart';
 import 'package:http/http.dart' as http;
 
 class CovidApiService {
+
+  Future<dynamic> searchData(String name) async
+  {
+    var client = http.Client();
+    var apiUrl = Uri.parse("http://localhost:3001/api/patient/search");
+
+    var response = await client.post(apiUrl,
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        body: jsonEncode(<String, String>{
+          "name": name,
+        })
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    }
+    else {
+      throw Exception("failed to search");
+    }
+  }
+
   Future<dynamic> sendData(String name, String phone, String address, String symptom,String status) async
   {
     var client = http.Client();
